@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xenitide - Developer Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <header class="top-bar">
+        <div class="top-bar-left">
+            <div class="logo">
+                <i class="fas fa-rocket"></i>
+                <span>Xenitide</span>
+            </div>
+            <div class="project-dropdown">
+                <select id="projectSelector">
+                    <option>My Project</option>
+                    <option>Another Project</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" id="newBtn">
+                <i class="fas fa-plus"></i> New
+            </button>
+        </div>
+        
+        <div class="top-bar-center">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search files, tables, logs...">
+            </div>
+        </div>
+        
+        <div class="top-bar-right">
+            <button class="btn btn-icon" id="notificationsBtn">
+                <i class="fas fa-bell"></i>
+                <span class="badge">3</span>
+            </button>
+            <button class="btn btn-icon" id="profileBtn">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <nav class="left-sidebar">
+            <ul class="nav-menu">
+                <li class="nav-item active" data-view="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </li>
+                <li class="nav-item" data-view="projects">
+                    <i class="fas fa-folder"></i>
+                    <span>Projects</span>
+                </li>
+                <li class="nav-item" data-view="repository">
+                    <i class="fas fa-code-branch"></i>
+                    <span>Repositories</span>
+                </li>
+                <li class="nav-item" data-view="database">
+                    <i class="fas fa-database"></i>
+                    <span>Database</span>
+                </li>
+                <li class="nav-item" data-view="storage">
+                    <i class="fas fa-cloud"></i>
+                    <span>Storage</span>
+                </li>
+                <li class="nav-item" data-view="deployments">
+                    <i class="fas fa-rocket"></i>
+                    <span>Deployments</span>
+                </li>
+                <li class="nav-item" data-view="payments">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Payments</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Workspace -->
+        <main class="main-workspace">
+            <!-- Dashboard View -->
+            <div class="view-content" id="dashboard-view">
+                <div class="dashboard-header">
+                    <h1>Welcome back, Developer!</h1>
+                    <p>Here's what's happening with your projects today.</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>12</h3>
+                            <p>Active Projects</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-code-commit"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>156</h3>
+                            <p>Total Commits</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>8</h3>
+                            <p>Deployments</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>2.5K</h3>
+                            <p>Total Users</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Repository View -->
+            <div class="view-content hidden" id="repository-view">
+                <div class="repo-container">
+                    <div class="file-explorer">
+                        <div class="file-header">
+                            <h3>Files</h3>
+                            <button class="btn btn-sm btn-secondary">
+                                <i class="fas fa-plus"></i> New File
+                            </button>
+                        </div>
+                        <div class="file-list">
+                            <div class="file-item active">
+                                <i class="fas fa-file-code"></i>
+                                <span>index.html</span>
+                            </div>
+                            <div class="file-item">
+                                <i class="fas fa-file-code"></i>
+                                <span>styles.css</span>
+                            </div>
+                            <div class="file-item">
+                                <i class="fas fa-file-code"></i>
+                                <span>app.js</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-editor">
+                        <div class="editor-header">
+                            <span>index.html</span>
+                        </div>
+                        <div class="editor-content">
+                            <pre><code>function app() {
+  return "Hello World";
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="repo-actions">
+                    <input type="text" placeholder="Commit message..." class="commit-input">
+                    <button class="btn btn-primary">Commit</button>
+                    <button class="btn btn-success">
+                        <i class="fas fa-rocket"></i> Deploy
+                    </button>
+                </div>
+            </div>
+
+            <!-- Database View -->
+            <div class="view-content hidden" id="database-view">
+                <div class="database-header">
+                    <div class="table-selector">
+                        <label>Tables:</label>
+                        <select>
+                            <option>Users</option>
+                            <option>Products</option>
+                            <option>Orders</option>
+                        </select>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-plus"></i> New Table
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>John Doe</td>
+                                <td>test@mail.com</td>
+                                <td>admin</td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary">Edit</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Jane Smith</td>
+                                <td>jane@mail.com</td>
+                                <td>user</td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary">Edit</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-actions">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Row
+                    </button>
+                    <button class="btn btn-success">Save Changes</button>
+                </div>
+            </div>
+
+            <!-- Deployments View -->
+            <div class="view-content hidden" id="deployments-view">
+                <div class="deployments-header">
+                    <h2>Latest Deployments</h2>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-rocket"></i> Deploy New Version
+                    </button>
+                </div>
+                <div class="deployments-list">
+                    <div class="deployment-item success">
+                        <div class="deployment-status">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Build Success</span>
+                        </div>
+                        <div class="deployment-time">2 mins ago</div>
+                        <button class="btn btn-sm btn-secondary">View Logs</button>
+                    </div>
+                    <div class="deployment-item failed">
+                        <div class="deployment-status">
+                            <i class="fas fa-times-circle"></i>
+                            <span>Build Failed</span>
+                        </div>
+                        <div class="deployment-time">5 mins ago</div>
+                        <button class="btn btn-sm btn-primary">Retry</button>
+                    </div>
+                    <div class="deployment-item success">
+                        <div class="deployment-status">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Build Success</span>
+                        </div>
+                        <div class="deployment-time">1 hour ago</div>
+                        <button class="btn btn-sm btn-secondary">View Logs</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payments View -->
+            <div class="view-content hidden" id="payments-view">
+                <div class="payments-header">
+                    <h2>Payments Dashboard</h2>
+                    <button class="btn btn-primary">Create Payment Link</button>
+                </div>
+                <div class="payments-stats">
+                    <div class="payment-stat">
+                        <h3>₱2,500</h3>
+                        <p>Total</p>
+                    </div>
+                    <div class="payment-stat">
+                        <h3>10</h3>
+                        <p>Successful</p>
+                    </div>
+                    <div class="payment-stat">
+                        <h3>2</h3>
+                        <p>Pending</p>
+                    </div>
+                </div>
+                <div class="payments-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Alex</td>
+                                <td>₱500</td>
+                                <td><span class="status success">Paid</span></td>
+                                <td>Today</td>
+                            </tr>
+                            <tr>
+                                <td>Sarah</td>
+                                <td>₱1,000</td>
+                                <td><span class="status pending">Pending</span></td>
+                                <td>Yesterday</td>
+                            </tr>
+                            <tr>
+                                <td>Mike</td>
+                                <td>₱1,000</td>
+                                <td><span class="status success">Paid</span></td>
+                                <td>2 days ago</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <!-- Logs Panel -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h3>Logs</h3>
+                    <button class="btn btn-sm btn-icon">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="panel-content logs">
+                    <div class="log-entry">
+                        <span class="timestamp">10:23:45</span>
+                        <span class="log-text">> Build started...</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="timestamp">10:23:47</span>
+                        <span class="log-text">> Installing dependencies...</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="timestamp">10:23:52</span>
+                        <span class="log-text">> Done.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Assistant Panel -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h3>AI Assistant</h3>
+                    <button class="btn btn-sm btn-icon">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="panel-content">
+                    <div class="ai-suggestion">
+                        <p>"Summarize this code"</p>
+                    </div>
+                    <div class="ai-input">
+                        <input type="text" placeholder="Ask AI...">
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Environment Variables Panel -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h3>Env Variables</h3>
+                    <button class="btn btn-sm btn-icon">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="panel-content">
+                    <div class="env-var">
+                        <span class="env-key">API_KEY</span>
+                        <span class="env-value">********</span>
+                    </div>
+                    <div class="env-var">
+                        <span class="env-key">DB_URL</span>
+                        <span class="env-value">********</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions Panel -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h3>Quick Actions</h3>
+                </div>
+                <div class="panel-content">
+                    <div class="quick-actions">
+                        <button class="btn btn-secondary btn-sm">Restart</button>
+                        <button class="btn btn-secondary btn-sm">Stop</button>
+                        <button class="btn btn-secondary btn-sm">Clear Logs</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay hidden" id="createProjectModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Create New Project</h2>
+                <button class="btn btn-icon" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="projectName">Name:</label>
+                    <input type="text" id="projectName" placeholder="Enter project name">
+                </div>
+                <div class="form-group">
+                    <label for="projectTemplate">Template:</label>
+                    <select id="projectTemplate">
+                        <option>Blank Project</option>
+                        <option>React App</option>
+                        <option>Node.js API</option>
+                        <option>Static Website</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelModal">Cancel</button>
+                <button class="btn btn-primary" id="createProject">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
